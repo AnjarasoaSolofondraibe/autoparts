@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ClientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +20,34 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/espace-client', [App\Http\Controllers\ClientController::class, 'index'])->name('espace.client');
+    Route::get('/mes-commandes', [App\Http\Controllers\ClientController::class, 'commandes'])->name('client.commandes');
+    Route::get('/mon-profil', [App\Http\Controllers\ClientController::class, 'profil'])->name('client.profil');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->get('/mon-profil/edit', [ClientController::class, 'editProfil'])->name('profil.edit');
+Route::middleware(['auth'])->post('/mon-profil/update', [ClientController::class, 'updateProfil'])->name('profil.update');
 
-Route::get('/panier', [App\Http\Controllers\PanierController::class, 'index'])->name('home');
+use App\Models\Produit;
+
+Route::get('/', function () {
+    $populaires = Produit::inRandomOrder()->take(4)->get();
+    return view('welcome', compact('populaires'));
+})->name('accueil');
+
+//Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/produits/{id}', [ProduitController::class, 'show'])->name('produits.show');
+
+Route::get('/catalogue', [ProduitController::class, 'index'])->name('catalogue');
+
+Route::post('/ajouter-au-panier/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+
+Route::get('/panier', [PanierController::class, 'voir'])->name('panier.voir');
+
+Route::post('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
+
+Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
