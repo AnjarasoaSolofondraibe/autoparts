@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactController;
 
 
 /*
@@ -32,7 +33,7 @@ Route::middleware(['auth'])->post('/mon-profil/update', [ClientController::class
 use App\Models\Produit;
 
 Route::get('/', function () {
-    $populaires = Produit::inRandomOrder()->take(4)->get();
+    $populaires = Produit::inRandomOrder()->take(12)->get();
     return view('welcome', compact('populaires'));
 })->name('accueil');
 
@@ -53,3 +54,7 @@ Route::post('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->n
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
 
 Route::post('/newsletter', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');

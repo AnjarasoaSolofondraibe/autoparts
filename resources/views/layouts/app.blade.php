@@ -19,6 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
      
     </style>
@@ -38,8 +40,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" href="/catalogue">Catalogue</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/espace-client">Espace client</a></li>
                         <li class="nav-item"><a class="nav-link" href="/panier">Panier</a></li>
+                        <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/espace-client">Espace client</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,6 +88,37 @@
             @yield('content')
         </main>
     </div>
+    <footer class="bg-dark text-light pt-5 pb-3 mt-5">
+        <div class="container">
+            <div class="row">
+    
+                <!-- À propos -->
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">AutoParts</h5>
+                    <p>Vente de pièces détachées auto en ligne, au meilleur prix. Livraison rapide partout à Madagascar.</p>
+                </div>
+    
+                <!-- Liens utiles -->
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Liens utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('accueil') }}" class="text-light text-decoration-none">Accueil</a></li>
+                        <li><a href="{{ route('catalogue') }}" class="text-light text-decoration-none">Catalogue</a></li>
+                        <li><a href="{{ route('panier.voir') }}" class="text-light text-decoration-none">Panier</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Newsletter</h5>
+                    <form action="{{ route('newsletter.subscribe') }}" method="POST" class="d-flex">
+                        @csrf
+                        <input type="email" name="email" class="form-control me-2" placeholder="Votre e-mail" required>
+                        <button class="btn btn-success">OK</button>
+                    </form>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
        var carousel = document.querySelector('#produitsPopulairesCarousel');

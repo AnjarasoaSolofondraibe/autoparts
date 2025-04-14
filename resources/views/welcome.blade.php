@@ -68,14 +68,15 @@
 
     <h2 class="text-center mb-4 mt-10">Produits Populaires</h2>
 
-    <div id="produitsPopulairesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="produitsPopulairesCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @foreach ($populaires->chunk(4) as $chunkIndex => $chunk)
                 <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                    <div class="container">
                     <div class="row justify-content-center">
                         @foreach ($chunk as $produit)
                             <div class="col-md-3">
-                                <div class="card mb-3">
+                                <div class="card mb-3 shadow-sm">
                                     <img src="{{ asset('images/produits/' . $produit->image) }}" class="card-img-top object-fit-cover" style="height: 200px;" alt="{{ $produit->nom }}">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">{{ $produit->nom }}</h5>
@@ -87,16 +88,10 @@
                         @endforeach
                     </div>
                 </div>
+                </div>
             @endforeach
 
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#produitsPopulairesCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#produitsPopulairesCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
     </div>
 
     {{-- Newsletter / contact --}}
