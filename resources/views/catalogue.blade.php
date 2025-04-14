@@ -59,7 +59,7 @@
                 @foreach($produits as $produit)
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="{{ asset('images/produits/'.$produit->image) }}" class="card-img-top object-fit-cover" style="height: 200px;"alt="{{ $produit->nom }}">
+                            <img src="{{ asset('images/produits/'.$produit->image) }}" class="card-img-top object-fit-cover" style="height: 200px;" alt="{{ $produit->nom }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $produit->nom }}</h5>
                                 <p class="card-text">{{ $produit->marque }} - {{ $produit->type_piece }}</p>

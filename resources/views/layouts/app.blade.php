@@ -85,5 +85,17 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+       var carousel = document.querySelector('#produitsPopulairesCarousel');
+            if (carousel) {
+                new bootstrap.Carousel(carousel, {
+                    interval: 4000, // 4 secondes
+                    ride: 'carousel',
+                    pause: false,   // même au survol
+                    wrap: true      // boucle infinie
+                });
+            }
+    </script>
 </body>
 </html>

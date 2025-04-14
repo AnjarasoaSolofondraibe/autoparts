@@ -51,3 +51,5 @@ Route::get('/panier', [PanierController::class, 'voir'])->name('panier.voir');
 Route::post('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
 
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
+
+Route::post('/newsletter', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');

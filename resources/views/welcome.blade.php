@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@if(session('success'))
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger mt-3">
+        {{ $errors->first('email') }}
+    </div>
+@endif
+
 @section('content')
 <div class="container py-5">
 
@@ -23,7 +35,7 @@
     </div>
 
     {{-- Catégories principales --}}
-    <h2 class="mb-4">🔧 Nos Catégories</h2>
+    <h2 class="text-center mb-4">🔧 Nos Catégories</h2>
     <div class="row text-center mb-5">
         <div class="col-md-4 mb-3">
             <div class="card h-100 shadow-sm">
@@ -54,31 +66,7 @@
         </div>
     </div>
 
-    {{-- Produits populaires --}}
-    <h2 class="mb-4">🔥 Produits populaires</h2>
-    <div class="row">
-        @foreach ($populaires as $produit)
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <img src="{{ asset('produits/' . $produit->image) }}" class="card-img-top" alt="{{ $produit->nom }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $produit->nom }}</h5>
-                        <p class="card-text">{{ $produit->categorie }}</p>
-                        <p class="text-success fw-bold">{{ number_format($produit->prix, 2) }} €</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-end gap-2">
-                        <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-sm btn-outline-info">Voir</a>
-                        <form action="{{ route('panier.ajouter', $produit->id) }}" method="POST">
-                            @csrf
-                            <button class="btn btn-sm btn-primary">Ajouter</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-    <h3 class="text-center mb-4">Produits Populaires</h3>
+    <h2 class="text-center mb-4 mt-10">Produits Populaires</h2>
 
     <div id="produitsPopulairesCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -88,11 +76,11 @@
                         @foreach ($chunk as $produit)
                             <div class="col-md-3">
                                 <div class="card mb-3">
-                                    <img src="{{ asset('images/' . $produit->image) }}" class="card-img-top" alt="{{ $produit->nom }}">
+                                    <img src="{{ asset('images/produits/' . $produit->image) }}" class="card-img-top object-fit-cover" style="height: 200px;" alt="{{ $produit->nom }}">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">{{ $produit->nom }}</h5>
-                                        <p class="card-text">{{ number_format($produit->prix, 2) }} €</p>
-                                        <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-primary btn-sm">Voir</a>
+                                        <p class="text-success fw-bold">{{ number_format($produit->prix, 2) }} ar</p>
+                                        <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-outline-info btn-sm">Voir</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,10 +92,10 @@
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#produitsPopulairesCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true">1</span>
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#produitsPopulairesCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true">2</span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
     </div>
 
@@ -115,9 +103,10 @@
     <div class="bg-light p-5 mt-5 rounded shadow-sm">
         <h3 class="mb-3">📬 Abonnez-vous à notre newsletter</h3>
         <p>Recevez les nouveautés et promotions directement dans votre boîte mail.</p>
-        <form action="#" method="POST" class="row g-3 mt-3">
+        <form action="{{ route('newsletter.subscribe') }}" method="POST" class="row g-3 mt-3">
+            @csrf
             <div class="col-md-8">
-                <input type="email" class="form-control" placeholder="Votre adresse e-mail" required>
+                <input type="email" name="email" class="form-control" placeholder="Votre adresse e-mail" required>
             </div>
             <div class="col-md-4">
                 <button class="btn btn-success w-100">S’abonner</button>
@@ -127,11 +116,3 @@
 
 </div>
 @endsection
-
-<script>
-    var carousel = document.querySelector('#produitsPopulairesCarousel');
-    var carouselInstance = new bootstrap.Carousel(carousel, {
-        interval: 5000,
-        ride: 'carousel'
-    });
-</script>
