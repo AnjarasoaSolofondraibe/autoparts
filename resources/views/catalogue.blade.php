@@ -27,11 +27,11 @@
                     <label for="type" class="form-label">Type de pièce</label>
                     <select name="type" class="form-select">
                         <option value="Toutes">Toutes</option>
-                        <option value="Filtre">Filtre</option>
-                        <option value="Plaquette">Plaquette</option>
-                        <option value="Bougie">Bougie</option>
-                        <option value="Batterie">Batterie</option>
-                        <option value="Courroie">Courroie</option>
+                        <option value="Filtre" {{ old('type', request('type')) == 'Filtre' ? 'selected' : '' }}>Filtre</option>
+                        <option value="Plaquette" {{ old('type', request('type')) == 'Plaquette' ? 'selected' : '' }}>Plaquette</option>
+                        <option value="Bougie" {{ old('type', request('type')) == 'Bougie' ? 'selected' : '' }}>Bougie</option>
+                        <option value="Batterie" {{ old('type', request('type')) == 'Batterie' ? 'selected' : '' }}>Batterie</option>
+                        <option value="Courroie" {{ old('type', request('type')) == 'Courroie' ? 'selected' : '' }}>Courroie</option>
                     </select>
                 </div>
 
@@ -39,14 +39,14 @@
                     <label for="dispo" class="form-label">Disponibilité</label>
                     <select name="dispo" class="form-select">
                         <option value="Toutes">Toutes</option>
-                        <option value="En stock">En stock</option>
-                        <option value="Rupture">Rupture</option>
+                        <option value="En stock" {{ old('dispo', request('dispo')) == 'En stock' ? 'selected' : '' }}>En stock</option>
+                        <option value="Rupture" {{ old('dispo', request('dispo')) == 'Rupture' ? 'selected' : '' }}>Rupture</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="prix" class="form-label">Prix maximum</label>
-                    <input type="number" name="prix" class="form-control" placeholder="Ex: 100">
+                    <input type="number" name="prix" class="form-control" placeholder="Ex: 100 ar">
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Filtrer</button>
@@ -63,7 +63,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $produit->nom }}</h5>
                                 <p class="card-text">{{ $produit->marque }} - {{ $produit->type_piece }}</p>
-                                <p class="card-text text-success fw-bold">{{ $produit->prix }} €</p>
+                                <p class="card-text text-success fw-bold">{{ number_format($produit->prix,0) }} ar</p>
                             </div>
                             <div class="card-footer d-flex justify-content-end gap-2">
                                 {{-- Bouton fiche produit --}}

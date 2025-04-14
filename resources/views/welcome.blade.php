@@ -79,7 +79,7 @@
                                     <img src="{{ asset('images/produits/' . $produit->image) }}" class="card-img-top object-fit-cover" style="height: 200px;" alt="{{ $produit->nom }}">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">{{ $produit->nom }}</h5>
-                                        <p class="text-success fw-bold">{{ number_format($produit->prix, 2) }} ar</p>
+                                        <p class="text-success fw-bold">{{ number_format($produit->prix, 0) }} ar</p>
                                         <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-outline-info btn-sm">Voir</a>
                                     </div>
                                 </div>

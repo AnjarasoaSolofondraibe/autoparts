@@ -26,12 +26,12 @@
                     @php $sousTotal = $item['prix'] * $item['quantite']; @endphp
                     <tr>
                         <td width="100">
-                            <img src="{{ asset('storage/' . $item['image']) }}" class="img-fluid" width="80" alt="{{ $item['nom'] }}">
+                            <img src="{{ asset('images/produits/' . $item['image']) }}" class="img-fluid" width="80" alt="{{ $item['nom'] }}">
                         </td>
                         <td>{{ $item['nom'] }}</td>
-                        <td>{{ number_format($item['prix'], 2) }} €</td>
+                        <td>{{ number_format($item['prix'], 0) }} ar</td>
                         <td>{{ $item['quantite'] }}</td>
-                        <td>{{ number_format($sousTotal, 2) }} €</td>
+                        <td>{{ number_format($sousTotal, 0) }} ar</td>
                         <td>
                             <form action="{{ route('panier.supprimer', $id) }}" method="POST" onsubmit="return confirm('Supprimer ce produit ?');">
                                 @csrf
@@ -43,7 +43,7 @@
                 @endforeach
                 <tr class="table-info">
                     <td colspan="4" class="text-end fw-bold">Total</td>
-                    <td colspan="2" class="fw-bold">{{ number_format($total, 2) }} €</td>
+                    <td colspan="2" class="fw-bold">{{ number_format($total, 0) }} ariary</td>
                 </tr>
             </tbody>
         </table>
