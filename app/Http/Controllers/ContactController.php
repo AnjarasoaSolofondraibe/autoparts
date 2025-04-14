@@ -20,7 +20,7 @@ class ContactController extends Controller
             'message' => 'required|string|min:10',
         ]);
 
-         Mail::to('admin@vortex75.com')->send(new ContactMail($request->all()));
+         Mail::to('anjara.solofondraibe@gmail.com')->send(new ContactMail($request->all()));
 
         return back()->with('success', 'Merci pour votre message ! Nous vous répondrons bientôt.');
     }
