@@ -41,6 +41,5 @@ class ProduitController extends Controller
         $produit = Produit::findOrFail($id);
         return view('show', compact('produit'));
     }
-
     
 }

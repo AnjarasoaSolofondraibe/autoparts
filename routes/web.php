@@ -58,3 +58,8 @@ Route::post('/newsletter', [NewsletterController::class, 'subscribe'])->name('ne
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
+// routes/web.php
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('produits', \App\Http\Controllers\Admin\ProduitController::class);
+});
